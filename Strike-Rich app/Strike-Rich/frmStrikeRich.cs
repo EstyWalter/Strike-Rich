@@ -22,15 +22,22 @@ namespace Strike_Rich
         public frmStrikeRich()
         {
             InitializeComponent();
+            tblMain = new TableLayoutPanel();
+            this.Controls.Add(tblMain);
+
             HideDiamondAndWater();
             Island = new() { pbIsland1, pbIsland2, pbIsland3, pbIsland4, pbIsland5, pbIsland6, pbIsland7, pbIsland8, pbIsland9, pbIsland10, pbIsland11, pbIsland12 };
             Image("StartScreen.png");
             btnDoor.Parent = pbMain;
-            Parent(btnStartGo);
-            Island.ForEach(i => i.Click += I_Click);
+            btnStartGo.Parent = pbMain;
+            tblMain.Parent = pbMain;
+            txtInstructions.Parent = pbMain;
             pbIslandStart.Enabled = false;
+            tblMain.Visible = false;
+            btnStartGo.Visible = false;
+            pbIslandStart.Visible = false;
             pbMain.BringToFront();
-            // tblMain.SendToBack();
+            Island.ForEach(i => i.Click += I_Click);
             btnStartGo.Click += BtnStartGo_Click;
             btnDoor.Click += BtnDoor_Click;
             pbMain.Resize += PbMain_Resize;
@@ -47,15 +54,13 @@ namespace Strike_Rich
             pbMain.Dock = DockStyle.Fill;
             if (picture == "win.png" || picture == "Sinking.png")
             {
-                Island.ForEach(i => Visible(i));
-                Visible(pbIslandStart);
+                Island.ForEach(i => i.Visible = false);
+                pbIslandStart.Visible = false;
+                tblMain.Visible = false;
             }
         }
 
-        private void Visible(Control thecontrol, bool status = false)
-        {
-            thecontrol.Visible = status;
-        }
+
 
         private void Parent(Control thecontrol)
         {
@@ -63,15 +68,14 @@ namespace Strike_Rich
         }
         private void Settings(Control thecontrol)
         {
-            thecontrol.Parent = tblMain;
             thecontrol.BackColor = Color.Transparent;
-            thecontrol.BringToFront();
+
             thecontrol.Enabled = false;
         }
 
         private void StartGame()
         {
-            Visible(btnDoor);
+            btnDoor.Visible = false;
             txtInstructions.BackColor = Color.AliceBlue;
             txtInstructions.ForeColor = Color.Black;
             txtInstructions.Text = "A poor farmer is digging to find a treasure and save his family home. Click the island to dig for hidden diamond. (Watch out for floods - some islands are traps!) Click go to skip to the next island.";
@@ -79,12 +83,22 @@ namespace Strike_Rich
             Image(pbIslandStart, "House2Boats.png");
             Island.ForEach(i => Image(i, "Island.png"));
             Island.ForEach(i => Settings(i));
-            pbIslandStart.Parent = pbMain;
             Settings(pbIslandStart);
+            tblMain.Visible = true;
+
             tblMain.Parent = pbMain;
             tblMain.BackColor = Color.Transparent;
             tblMain.Dock = DockStyle.Fill;
+            btnStartGo.Visible = true;
+            pbIslandStart.Visible = true;
+            txtInstructions.Visible = true;
+            Island.ForEach(i => i.Visible = true);
+            pbIslandStart.Visible = true;
             tblMain.BringToFront();
+            btnStartGo.BringToFront();
+            pbIslandStart.BringToFront();
+            txtInstructions.BringToFront();
+            btnStartGo.BringToFront();
 
 
         }
@@ -146,8 +160,8 @@ namespace Strike_Rich
         {
             HideDiamondAndWater();
             StartGame();
-            Island.ForEach(i => Visible(i, true));
-            Visible(pbIslandStart, true);
+            Island.ForEach(i => i.Visible = true);
+            pbIslandStart.Visible = true;
             i = 0;
             btnStartGo.Text = "START";
             chance = 3;
@@ -267,6 +281,51 @@ namespace Strike_Rich
         }
 
         private void tblMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pbIsland12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbIsland4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbIsland6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbIsland9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbIsland7_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbIsland3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbIsland8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbIsland11_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbMain_Click(object sender, EventArgs e)
         {
 
         }
