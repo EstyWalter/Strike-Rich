@@ -29,44 +29,44 @@
         private void InitializeComponent()
         {
             TableLayoutPanel tblMain;
-            btnStartGo = new Button();
-            pbIslandStart = new PictureBox();
             pbIsland1 = new PictureBox();
             pbIsland2 = new PictureBox();
             pbIsland3 = new PictureBox();
             pbIsland4 = new PictureBox();
-            pbIsland7 = new PictureBox();
             pbIsland10 = new PictureBox();
             pbIsland6 = new PictureBox();
             pbIsland8 = new PictureBox();
             pbIsland9 = new PictureBox();
-            pbIsland12 = new PictureBox();
             pbIsland11 = new PictureBox();
             pbIsland5 = new PictureBox();
+            btnStartGo = new Button();
+            pbIslandStart = new PictureBox();
+            pbIsland7 = new PictureBox();
+            pbIsland12 = new PictureBox();
             txtInstructions = new TextBox();
             pbMain = new PictureBox();
             btnDoor = new Button();
             tblMain = new TableLayoutPanel();
             tblMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbIslandStart).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbIsland7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbIsland12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbIslandStart).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbIsland7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbIsland12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbMain).BeginInit();
             SuspendLayout();
             // 
             // tblMain
             // 
-            tblMain.BackColor = Color.Pink;
+            tblMain.BackColor = Color.Transparent;
             tblMain.ColumnCount = 7;
             tblMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7.4920063F));
             tblMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 28.1725883F));
@@ -75,20 +75,20 @@
             tblMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15.1015224F));
             tblMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17.3284874F));
             tblMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2946768F));
-            tblMain.Controls.Add(btnStartGo, 0, 1);
-            tblMain.Controls.Add(pbIslandStart, 3, 0);
             tblMain.Controls.Add(pbIsland1, 4, 1);
             tblMain.Controls.Add(pbIsland2, 5, 2);
             tblMain.Controls.Add(pbIsland3, 6, 3);
             tblMain.Controls.Add(pbIsland4, 6, 4);
-            tblMain.Controls.Add(pbIsland7, 3, 7);
             tblMain.Controls.Add(pbIsland10, 0, 4);
             tblMain.Controls.Add(pbIsland6, 4, 6);
             tblMain.Controls.Add(pbIsland8, 2, 6);
             tblMain.Controls.Add(pbIsland9, 1, 5);
-            tblMain.Controls.Add(pbIsland12, 1, 2);
             tblMain.Controls.Add(pbIsland11, 0, 3);
             tblMain.Controls.Add(pbIsland5, 5, 5);
+            tblMain.Controls.Add(btnStartGo, 0, 1);
+            tblMain.Controls.Add(pbIslandStart, 2, 1);
+            tblMain.Controls.Add(pbIsland7, 3, 6);
+            tblMain.Controls.Add(pbIsland12, 1, 2);
             tblMain.Dock = DockStyle.Fill;
             tblMain.Location = new Point(0, 0);
             tblMain.Name = "tblMain";
@@ -104,29 +104,6 @@
             tblMain.Size = new Size(1576, 869);
             tblMain.TabIndex = 38;
             tblMain.Paint += tblMain_Paint;
-            // 
-            // btnStartGo
-            // 
-            btnStartGo.Anchor = AnchorStyles.None;
-            btnStartGo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnStartGo.BackColor = Color.AliceBlue;
-            btnStartGo.Location = new Point(5, 99);
-            btnStartGo.Name = "btnStartGo";
-            btnStartGo.Size = new Size(107, 105);
-            btnStartGo.TabIndex = 40;
-            btnStartGo.Text = "START";
-            btnStartGo.UseVisualStyleBackColor = false;
-            // 
-            // pbIslandStart
-            // 
-            pbIslandStart.BackColor = Color.HotPink;
-            pbIslandStart.Cursor = Cursors.IBeam;
-            pbIslandStart.Location = new Point(678, 3);
-            pbIslandStart.Name = "pbIslandStart";
-            pbIslandStart.Size = new Size(158, 86);
-            pbIslandStart.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbIslandStart.TabIndex = 36;
-            pbIslandStart.TabStop = false;
             // 
             // pbIsland1
             // 
@@ -176,18 +153,6 @@
             pbIsland4.TabStop = false;
             pbIsland4.Click += pbIsland4_Click;
             // 
-            // pbIsland7
-            // 
-            pbIsland7.BackColor = Color.Magenta;
-            pbIsland7.Dock = DockStyle.Fill;
-            pbIsland7.Location = new Point(678, 753);
-            pbIsland7.Name = "pbIsland7";
-            pbIsland7.Size = new Size(158, 113);
-            pbIsland7.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbIsland7.TabIndex = 4;
-            pbIsland7.TabStop = false;
-            pbIsland7.Click += pbIsland7_Click_1;
-            // 
             // pbIsland10
             // 
             pbIsland10.BackColor = Color.Magenta;
@@ -236,18 +201,6 @@
             pbIsland9.TabStop = false;
             pbIsland9.Click += pbIsland9_Click;
             // 
-            // pbIsland12
-            // 
-            pbIsland12.BackColor = Color.Magenta;
-            pbIsland12.Dock = DockStyle.Fill;
-            pbIsland12.Location = new Point(121, 215);
-            pbIsland12.Name = "pbIsland12";
-            pbIsland12.Size = new Size(438, 103);
-            pbIsland12.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbIsland12.TabIndex = 10;
-            pbIsland12.TabStop = false;
-            pbIsland12.Click += pbIsland12_Click;
-            // 
             // pbIsland11
             // 
             pbIsland11.BackColor = Color.Magenta;
@@ -271,6 +224,56 @@
             pbIsland5.TabIndex = 17;
             pbIsland5.TabStop = false;
             // 
+            // btnStartGo
+            // 
+            btnStartGo.Anchor = AnchorStyles.None;
+            btnStartGo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnStartGo.BackColor = Color.AliceBlue;
+            btnStartGo.Location = new Point(5, 99);
+            btnStartGo.Name = "btnStartGo";
+            btnStartGo.Size = new Size(107, 105);
+            btnStartGo.TabIndex = 40;
+            btnStartGo.Text = "START";
+            btnStartGo.UseVisualStyleBackColor = false;
+            // 
+            // pbIslandStart
+            // 
+            pbIslandStart.BackColor = Color.HotPink;
+            tblMain.SetColumnSpan(pbIslandStart, 2);
+            pbIslandStart.Cursor = Cursors.IBeam;
+            pbIslandStart.Dock = DockStyle.Fill;
+            pbIslandStart.Location = new Point(565, 95);
+            pbIslandStart.Name = "pbIslandStart";
+            pbIslandStart.Size = new Size(271, 114);
+            pbIslandStart.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbIslandStart.TabIndex = 41;
+            pbIslandStart.TabStop = false;
+            pbIslandStart.Click += pbIslandStart_Click;
+            // 
+            // pbIsland7
+            // 
+            pbIsland7.BackColor = Color.Magenta;
+            pbIsland7.Dock = DockStyle.Fill;
+            pbIsland7.Location = new Point(678, 649);
+            pbIsland7.Name = "pbIsland7";
+            pbIsland7.Size = new Size(158, 98);
+            pbIsland7.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbIsland7.TabIndex = 4;
+            pbIsland7.TabStop = false;
+            pbIsland7.Click += pbIsland7_Click_1;
+            // 
+            // pbIsland12
+            // 
+            pbIsland12.BackColor = Color.Magenta;
+            pbIsland12.Dock = DockStyle.Fill;
+            pbIsland12.Location = new Point(121, 215);
+            pbIsland12.Name = "pbIsland12";
+            pbIsland12.Size = new Size(438, 103);
+            pbIsland12.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbIsland12.TabIndex = 10;
+            pbIsland12.TabStop = false;
+            pbIsland12.Click += pbIsland12_Click;
+            // 
             // txtInstructions
             // 
             txtInstructions.BackColor = Color.FromArgb(90, 62, 32);
@@ -282,7 +285,7 @@
             txtInstructions.Name = "txtInstructions";
             txtInstructions.ReadOnly = true;
             txtInstructions.ScrollBars = ScrollBars.Vertical;
-            txtInstructions.Size = new Size(1576, 89);
+            txtInstructions.Size = new Size(1576, 10);
             txtInstructions.TabIndex = 33;
             txtInstructions.Text = "PRESS DOORKNOB TO START GAME";
             txtInstructions.TextAlign = HorizontalAlignment.Center;
@@ -328,19 +331,19 @@
             Text = "Strike Rich";
             Load += frmStrikeRich_Load;
             tblMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pbIslandStart).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbIsland7).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland10).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland8).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbIsland12).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland11).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIsland5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbIslandStart).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbIsland7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbIsland12).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbMain).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -361,10 +364,10 @@
         private PictureBox pbIsland8;
         private PictureBox pbIsland5;
         private PictureBox pbIsland7;
-        private PictureBox pbIslandStart;
         private PictureBox pbIsland4;
         private PictureBox pbIsland11;
         private PictureBox pbIsland6;
         private Button btnStartGo;
+        private PictureBox pbIslandStart;
     }
 }

@@ -22,21 +22,19 @@ namespace Strike_Rich
         public frmStrikeRich()
         {
             InitializeComponent();
-            tblMain = new TableLayoutPanel();
-            this.Controls.Add(tblMain);
-
+       
             HideDiamondAndWater();
             Island = new() { pbIsland1, pbIsland2, pbIsland3, pbIsland4, pbIsland5, pbIsland6, pbIsland7, pbIsland8, pbIsland9, pbIsland10, pbIsland11, pbIsland12 };
             Image("StartScreen.png");
             btnDoor.Parent = pbMain;
             btnStartGo.Parent = pbMain;
-            tblMain.Parent = pbMain;
+           //tblMain.Parent = pbMain;
             txtInstructions.Parent = pbMain;
             pbIslandStart.Enabled = false;
-            tblMain.Visible = false;
+            //.Visible = false;
             btnStartGo.Visible = false;
-            pbIslandStart.Visible = false;
-            pbMain.BringToFront();
+            // pbIslandStart.Visible = false;
+            //pbMain.BringToFront();
             Island.ForEach(i => i.Click += I_Click);
             btnStartGo.Click += BtnStartGo_Click;
             btnDoor.Click += BtnDoor_Click;
@@ -69,13 +67,18 @@ namespace Strike_Rich
         private void Settings(Control thecontrol)
         {
             thecontrol.BackColor = Color.Transparent;
-
             thecontrol.Enabled = false;
         }
 
         private void StartGame()
         {
-            btnDoor.Visible = false;
+            tblMain = new TableLayoutPanel();
+            pbMain.Controls.Add(tblMain);
+            tblMain.Visible = true;
+           // tblMain.Parent = pbMain;
+            //pbMain.SendToBack();
+            tblMain.BackColor = Color.FromArgb(120, Color.White);
+         //   tblMain.Dock = DockStyle.Fill;
             txtInstructions.BackColor = Color.AliceBlue;
             txtInstructions.ForeColor = Color.Black;
             txtInstructions.Text = "A poor farmer is digging to find a treasure and save his family home. Click the island to dig for hidden diamond. (Watch out for floods - some islands are traps!) Click go to skip to the next island.";
@@ -84,18 +87,12 @@ namespace Strike_Rich
             Island.ForEach(i => Image(i, "Island.png"));
             Island.ForEach(i => Settings(i));
             Settings(pbIslandStart);
-            tblMain.Visible = true;
-
-            tblMain.Parent = pbMain;
-            tblMain.BackColor = Color.Transparent;
-            tblMain.Dock = DockStyle.Fill;
+            btnDoor.Visible = false;
             btnStartGo.Visible = true;
             pbIslandStart.Visible = true;
-            txtInstructions.Visible = true;
             Island.ForEach(i => i.Visible = true);
             pbIslandStart.Visible = true;
             tblMain.BringToFront();
-            btnStartGo.BringToFront();
             pbIslandStart.BringToFront();
             txtInstructions.BringToFront();
             btnStartGo.BringToFront();
@@ -326,6 +323,11 @@ namespace Strike_Rich
         }
 
         private void pbMain_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbIslandStart_Click(object sender, EventArgs e)
         {
 
         }
