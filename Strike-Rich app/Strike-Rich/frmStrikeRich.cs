@@ -256,7 +256,7 @@ namespace Strike_Rich
             txtInstructions.Text = $"The dice landed on {diceRoll}. Press GO to move the farmer {diceRoll} space{(diceRoll == 1 ? "" : "s")}.";
         }
 
-        private void IslandChange()
+        private async void IslandChange()
         {
             if (diamond == i)
             {
@@ -271,19 +271,28 @@ namespace Strike_Rich
             {
                 Image(Island[i], "IslandWater.png");
                 Island[i].Enabled = false;
-                Island[i].Visible = false;
+                btnStartGo.Enabled = false;
+                btnRollDice.Enabled = false;
+                txtInstructions.Text = "Water is coming out of this island! The farmer needs a lifeboat.";
+                await Task.Delay(900);
+
                 chance--;
                 LoseLifeboat();
 
                 if (chance > 0)
                 {
+                    Image(Island[i], "LifeBoat.png");
+                    txtInstructions.Text = "The farmer got into a lifeboat. Now the flooded island is sinking away.";
+                    await Task.Delay(900);
+
+                    Island[i].Visible = false;
                     MoveFarmerToNextVisibleIsland();
                     diceRoll = 0;
                     ResetDiceButton();
                     btnStartGo.Text = "GO";
                     btnStartGo.Enabled = false;
                     btnRollDice.Enabled = true;
-                    txtInstructions.Text = "That island sunk! The farmer used a lifeboat and moved to the next island. Roll the dice before pressing GO again.";
+                    txtInstructions.Text = "The island sunk! The farmer moved to the next island. Roll the dice before pressing GO again.";
                 }
             }
             else
