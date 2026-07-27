@@ -169,21 +169,31 @@ namespace Strike_Rich
             return startIndex;
         }
 
+        private Point CenterLifeboatOnIsland(int islandIndex, Size lifeboatSize)
+        {
+            return new Point(
+                Island[islandIndex].Left + ((Island[islandIndex].Width - lifeboatSize.Width) / 2),
+                Island[islandIndex].Top + ((Island[islandIndex].Height - lifeboatSize.Height) / 2));
+        }
+
         private async Task AnimateLifeboatToIsland(int startIndex, int endIndex)
         {
+            Size lifeboatSize = new(
+                Math.Max(70, Island[endIndex].Width / 2),
+                Math.Max(50, Island[endIndex].Height / 2));
+            Point startLocation = CenterLifeboatOnIsland(startIndex, lifeboatSize);
+            Point endLocation = CenterLifeboatOnIsland(endIndex, lifeboatSize);
+
             PictureBox lifeboat = new()
             {
                 Parent = pbMain,
                 BackColor = Color.Transparent,
                 ImageLocation = path + "LifeBoat.png",
-                Location = Island[startIndex].Location,
-                Size = Island[startIndex].Size,
+                Location = startLocation,
+                Size = lifeboatSize,
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
             lifeboat.BringToFront();
-
-            Point startLocation = Island[startIndex].Location;
-            Point endLocation = Island[endIndex].Location;
             const int animationSteps = 24;
 
             for (int step = 1; step <= animationSteps; step++)
