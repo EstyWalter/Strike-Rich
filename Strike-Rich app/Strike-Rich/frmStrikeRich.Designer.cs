@@ -119,12 +119,14 @@ namespace Strike_Rich
             //
             btnRollDice.Anchor = AnchorStyles.None;
             btnRollDice.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnRollDice.BackColor = Color.AliceBlue;
+            btnRollDice.BackColor = Color.White;
+            btnRollDice.Font = new Font("Segoe UI Emoji", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRollDice.Location = new Point(113, 75);
             btnRollDice.Name = "btnRollDice";
             btnRollDice.Size = new Size(135, 105);
             btnRollDice.TabIndex = 56;
-            btnRollDice.Text = "ROLL DICE";
+            btnRollDice.Text = "🎲\nROLL";
+            btnRollDice.TextAlign = ContentAlignment.MiddleCenter;
             btnRollDice.UseVisualStyleBackColor = false;
             //
             // pbIsland1

@@ -18,6 +18,7 @@ namespace Strike_Rich
         int chance = 3;
         int diceRoll = 0;
         readonly Random dice = new();
+        readonly string[] diceFaces = { "⚀", "⚁", "⚂", "⚃", "⚄", "⚅" };
 
         public frmStrikeRich()
         {
@@ -82,7 +83,12 @@ namespace Strike_Rich
             VisibleControl(true);
             VisibleControl(btnRollDice, true);
             btnRollDice.Enabled = false;
-            btnRollDice.Text = "ROLL DICE";
+            ResetDiceButton();
+        }
+
+        private void ResetDiceButton()
+        {
+            btnRollDice.Text = "🎲\nROLL";
         }
 
         private void IslandImage(string picture)
@@ -131,7 +137,7 @@ namespace Strike_Rich
             Island[i].Enabled = false;
             i = (i + diceRoll) % Island.Count;
             diceRoll = 0;
-            btnRollDice.Text = "ROLL DICE";
+            ResetDiceButton();
             btnStartGo.Enabled = false;
             btnRollDice.Enabled = true;
             IslandImage("IslandFarmer.png");
@@ -147,7 +153,7 @@ namespace Strike_Rich
             i = 0;
             btnStartGo.Text = "START";
             btnStartGo.Enabled = true;
-            btnRollDice.Text = "ROLL DICE";
+            ResetDiceButton();
             btnRollDice.Enabled = false;
             diceRoll = 0;
             chance = 3;
@@ -192,7 +198,7 @@ namespace Strike_Rich
                 btnStartGo.Enabled = false;
                 btnRollDice.Enabled = true;
                 diceRoll = 0;
-                btnRollDice.Text = "ROLL DICE";
+                ResetDiceButton();
                 LoseLifeboat();
                 Image(Island[i], "LifeBoat.png");
                 Island[i].Enabled = false;
@@ -209,13 +215,23 @@ namespace Strike_Rich
             Go();
         }
 
-        private void BtnRollDice_Click(object? sender, EventArgs e)
+        private async void BtnRollDice_Click(object? sender, EventArgs e)
         {
-            diceRoll = dice.Next(1, 7);
-            btnRollDice.Text = $"DICE: {diceRoll}";
             btnRollDice.Enabled = false;
+            btnStartGo.Enabled = false;
+            txtInstructions.Text = "The dice is rolling...";
+
+            for (int roll = 0; roll < 12; roll++)
+            {
+                int rollingNumber = dice.Next(1, 7);
+                btnRollDice.Text = $"{diceFaces[rollingNumber - 1]}\nRolling";
+                await Task.Delay(100);
+            }
+
+            diceRoll = dice.Next(1, 7);
+            btnRollDice.Text = $"{diceFaces[diceRoll - 1]}\n{diceRoll}";
             btnStartGo.Enabled = true;
-            txtInstructions.Text = $"You rolled a {diceRoll}. Press GO to move the farmer {diceRoll} space{(diceRoll == 1 ? "" : "s")}.";
+            txtInstructions.Text = $"The dice landed on {diceRoll}. Press GO to move the farmer {diceRoll} space{(diceRoll == 1 ? "" : "s")}.";
         }
 
         private void IslandChange()
