@@ -135,13 +135,35 @@ namespace Strike_Rich
             txtInstructions.Text = "Click on the island to dig it up, or roll again before pressing GO to move to another island.";
             IslandImage("Island.png");
             Island[i].Enabled = false;
-            i = (i + diceRoll) % Island.Count;
+            for (int move = 0; move < diceRoll; move++)
+            {
+                AdvanceToNextVisibleIsland();
+            }
             diceRoll = 0;
             ResetDiceButton();
             btnStartGo.Enabled = false;
             btnRollDice.Enabled = true;
             IslandImage("IslandFarmer.png");
             LoseLifeboat();
+        }
+
+
+        private void AdvanceToNextVisibleIsland()
+        {
+            for (int islandCount = 0; islandCount < Island.Count; islandCount++)
+            {
+                i = (i + 1) % Island.Count;
+                if (Island[i].Visible)
+                {
+                    return;
+                }
+            }
+        }
+
+        private void MoveFarmerToNextVisibleIsland()
+        {
+            AdvanceToNextVisibleIsland();
+            IslandImage("IslandFarmer.png");
         }
 
         private void StartAgain()
@@ -247,13 +269,22 @@ namespace Strike_Rich
             }
             else if (water == i || water1 == i || water2 == i || water3 == i)
             {
-                IslandImage("IslandWater.png");
-                txtInstructions.Text = "POOR FARMER! press get a lifeboat to be saved. You will use up a chance";
-                btnStartGo.Text = "get a lifeboat";
-                btnStartGo.Enabled = true;
-                btnRollDice.Enabled = false;
+                Image(Island[i], "IslandWater.png");
                 Island[i].Enabled = false;
+                Island[i].Visible = false;
                 chance--;
+                LoseLifeboat();
+
+                if (chance > 0)
+                {
+                    MoveFarmerToNextVisibleIsland();
+                    diceRoll = 0;
+                    ResetDiceButton();
+                    btnStartGo.Text = "GO";
+                    btnStartGo.Enabled = false;
+                    btnRollDice.Enabled = true;
+                    txtInstructions.Text = "That island sunk! The farmer used a lifeboat and moved to the next island. Roll the dice before pressing GO again.";
+                }
             }
             else
             {
