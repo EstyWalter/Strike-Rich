@@ -204,7 +204,7 @@ namespace Strike_Rich
         }
         private void Go()
         {
-            if (btnStartGo.Text == "START" || btnStartGo.Text == "GO")
+            if (btnStartGo.Text == "START" || btnStartGo.Text.StartsWith("GO"))
             {
                 startgo();
             }
@@ -242,9 +242,9 @@ namespace Strike_Rich
             }
 
             diceRoll = dice.Next(1, 7);
-            SetStartGoButtonText("GO");
+            SetStartGoButtonText($"GO {diceRoll}");
             btnStartGo.Enabled = true;
-            txtInstructions.Text = $"The dice landed on {diceRoll}. Press GO to move the farmer {diceRoll} space{(diceRoll == 1 ? "" : "s")}.";
+            txtInstructions.Text = $"The dice landed on {diceRoll}. Press GO {diceRoll} to move the farmer {diceRoll} space{(diceRoll == 1 ? "" : "s")}.";
         }
 
         private async void IslandChange()
