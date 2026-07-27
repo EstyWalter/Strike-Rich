@@ -33,7 +33,6 @@ namespace Strike_Rich
             pbMain = new PictureBox();
             btnDoor = new Button();
             btnStartGo = new Button();
-            btnRollDice = new Button();
             pbIsland1 = new PictureBox();
             pbIsland2 = new PictureBox();
             pbIsland3 = new PictureBox();
@@ -114,20 +113,6 @@ namespace Strike_Rich
             btnStartGo.TabIndex = 41;
             btnStartGo.Text = "START";
             btnStartGo.UseVisualStyleBackColor = false;
-            //
-            // btnRollDice
-            //
-            btnRollDice.Anchor = AnchorStyles.None;
-            btnRollDice.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnRollDice.BackColor = Color.White;
-            btnRollDice.Font = new Font("Segoe UI Emoji", 32F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRollDice.Location = new Point(113, 75);
-            btnRollDice.Name = "btnRollDice";
-            btnRollDice.Size = new Size(107, 105);
-            btnRollDice.TabIndex = 56;
-            btnRollDice.Text = "🎲";
-            btnRollDice.TextAlign = ContentAlignment.MiddleCenter;
-            btnRollDice.UseVisualStyleBackColor = false;
             //
             // pbIsland1
             //
@@ -283,7 +268,6 @@ namespace Strike_Rich
             Controls.Add(pbIslandStart);
             Controls.Add(pbIsland7);
             Controls.Add(pbIsland11);
-            Controls.Add(btnRollDice);
             Controls.Add(btnStartGo);
             Controls.Add(btnDoor);
             Controls.Add(pbMain);
@@ -317,7 +301,6 @@ namespace Strike_Rich
         private PictureBox pbMain;
         private Button btnDoor;
         private Button btnStartGo;
-        private Button btnRollDice;
         private PictureBox pbIsland1;
         private PictureBox pbIsland2;
         private PictureBox pbIsland3;

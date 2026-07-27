@@ -30,7 +30,6 @@ namespace Strike_Rich
             VisibleControl(false);
             Island.ForEach(i => i.Click += I_Click);
             btnStartGo.Click += BtnStartGo_Click;
-            btnRollDice.Click += BtnRollDice_Click;
             btnDoor.Click += BtnDoor_Click;
         }
 
@@ -57,7 +56,6 @@ namespace Strike_Rich
         private void VisibleControl(Boolean status = false)
         {
             VisibleControl(btnStartGo, status);
-            VisibleControl(btnRollDice, status);
             VisibleControl(pbIslandStart, status);
             Island.ForEach(i => VisibleControl(i, status));
         }
@@ -81,14 +79,20 @@ namespace Strike_Rich
             Settings(pbIslandStart);
             VisibleControl(btnDoor);
             VisibleControl(true);
-            VisibleControl(btnRollDice, true);
-            btnRollDice.Enabled = false;
-            ResetDiceButton();
+            btnStartGo.Enabled = true;
+            SetStartGoButtonText("START");
+        }
+
+        private void SetStartGoButtonText(string text)
+        {
+            btnStartGo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnStartGo.Text = text;
         }
 
         private void ResetDiceButton()
         {
-            btnRollDice.Text = "🎲";
+            btnStartGo.Font = new Font("Segoe UI Emoji", 32F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnStartGo.Text = "🎲";
         }
 
         private void IslandImage(string picture)
@@ -117,9 +121,8 @@ namespace Strike_Rich
             {
                 txtInstructions.Text = "Roll the dice, then press GO to move the farmer by the number you rolled.";
                 IslandImage("IslandFarmer.png");
-                btnStartGo.Text = "GO";
-                btnStartGo.Enabled = false;
-                btnRollDice.Enabled = true;
+                ResetDiceButton();
+                btnStartGo.Enabled = true;
                 LoseLifeboat();
                 return;
             }
@@ -127,8 +130,7 @@ namespace Strike_Rich
             if (diceRoll == 0)
             {
                 txtInstructions.Text = "Roll the dice before pressing GO.";
-                btnStartGo.Enabled = false;
-                btnRollDice.Enabled = true;
+                btnStartGo.Enabled = true;
                 return;
             }
 
@@ -141,8 +143,7 @@ namespace Strike_Rich
             }
             diceRoll = 0;
             ResetDiceButton();
-            btnStartGo.Enabled = false;
-            btnRollDice.Enabled = true;
+            btnStartGo.Enabled = true;
             IslandImage("IslandFarmer.png");
             LoseLifeboat();
         }
@@ -173,10 +174,8 @@ namespace Strike_Rich
             Island.ForEach(i => i.Visible = true);
             pbIslandStart.Visible = true;
             i = 0;
-            btnStartGo.Text = "START";
+            SetStartGoButtonText("START");
             btnStartGo.Enabled = true;
-            ResetDiceButton();
-            btnRollDice.Enabled = false;
             diceRoll = 0;
             chance = 3;
         }
@@ -197,9 +196,8 @@ namespace Strike_Rich
                 case 0:
                     Image("Sinking.png");
                     txtInstructions.Text = "GAME OVER. farmer died a tragic death!";
-                    btnStartGo.Text = "start new game";
+                    SetStartGoButtonText("start new game");
                     btnStartGo.Enabled = true;
-                    btnRollDice.Enabled = false;
                     break;
             }
             pbIslandStart.Enabled = false;
@@ -214,44 +212,37 @@ namespace Strike_Rich
             {
                 StartAgain();
             }
-            else if (btnStartGo.Text == "get a lifeboat")
-            {
-                btnStartGo.Text = "GO";
-                btnStartGo.Enabled = false;
-                btnRollDice.Enabled = true;
-                diceRoll = 0;
-                ResetDiceButton();
-                LoseLifeboat();
-                Image(Island[i], "LifeBoat.png");
-                Island[i].Enabled = false;
-            }
-
         }
         private void BtnDoor_Click(object? sender, EventArgs e)
         {
             StartGame();
         }
 
-        private void BtnStartGo_Click(object? sender, EventArgs e)
+        private async void BtnStartGo_Click(object? sender, EventArgs e)
         {
+            if (btnStartGo.Text == "🎲")
+            {
+                await RollDice();
+                return;
+            }
+
             Go();
         }
 
-        private async void BtnRollDice_Click(object? sender, EventArgs e)
+        private async Task RollDice()
         {
-            btnRollDice.Enabled = false;
             btnStartGo.Enabled = false;
             txtInstructions.Text = "The dice is rolling...";
 
             for (int roll = 0; roll < 12; roll++)
             {
                 int rollingNumber = dice.Next(1, 7);
-                btnRollDice.Text = diceFaces[rollingNumber - 1];
+                btnStartGo.Text = diceFaces[rollingNumber - 1];
                 await Task.Delay(100);
             }
 
             diceRoll = dice.Next(1, 7);
-            btnRollDice.Text = diceFaces[diceRoll - 1];
+            SetStartGoButtonText("GO");
             btnStartGo.Enabled = true;
             txtInstructions.Text = $"The dice landed on {diceRoll}. Press GO to move the farmer {diceRoll} space{(diceRoll == 1 ? "" : "s")}.";
         }
@@ -263,16 +254,14 @@ namespace Strike_Rich
                 IslandImage("IslandDiamond.png");
                 txtInstructions.Text = "THE FARMER STRUCK IT RICH";
                 Image("win.png");
-                btnStartGo.Text = "start new game";
+                SetStartGoButtonText("start new game");
                 btnStartGo.Enabled = true;
-                btnRollDice.Enabled = false;
             }
             else if (water == i || water1 == i || water2 == i || water3 == i)
             {
                 Image(Island[i], "IslandWater.png");
                 Island[i].Enabled = false;
                 btnStartGo.Enabled = false;
-                btnRollDice.Enabled = false;
                 txtInstructions.Text = "Water is coming out of this island! The farmer needs a lifeboat.";
                 await Task.Delay(900);
 
@@ -289,9 +278,7 @@ namespace Strike_Rich
                     MoveFarmerToNextVisibleIsland();
                     diceRoll = 0;
                     ResetDiceButton();
-                    btnStartGo.Text = "GO";
-                    btnStartGo.Enabled = false;
-                    btnRollDice.Enabled = true;
+                    btnStartGo.Enabled = true;
                     txtInstructions.Text = "The island sunk! The farmer moved to the next island. Roll the dice before pressing GO again.";
                 }
             }
