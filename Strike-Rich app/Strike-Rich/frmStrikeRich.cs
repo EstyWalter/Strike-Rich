@@ -180,56 +180,51 @@ namespace Strike_Rich
             return new Point(left, top);
         }
 
-        private Bitmap DrawLifeboat(bool movingRight)
+        private async Task AnimateBoat(int startIndex, int endIndex)
         {
-            Bitmap boatImage = new(lifeboatSize.Width, lifeboatSize.Height);
-            using Graphics boat = Graphics.FromImage(boatImage);
-            boat.Clear(Color.Transparent);
-            boat.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            PictureBox boat = new PictureBox();
+            boat.Parent = pbMain;
+            boat.BackColor = Color.Transparent;
+            boat.SizeMode = PictureBoxSizeMode.Zoom;
+            boat.Size = new Size(150, 120);
 
-            Point[] hull = movingRight
-                ? new[] { new Point(8, 36), new Point(62, 36), new Point(74, 26), new Point(66, 48), new Point(16, 50) }
-                : new[] { new Point(72, 36), new Point(18, 36), new Point(6, 26), new Point(14, 48), new Point(64, 50) };
+            Bitmap bmp = new Bitmap(path + "LifeBoat.png");
 
-            boat.FillPolygon(Brushes.SaddleBrown, hull);
-            boat.DrawPolygon(Pens.Black, hull);
-            boat.FillEllipse(Brushes.PeachPuff, 34, 12, 12, 12);
-            boat.FillRectangle(Brushes.DarkGreen, 35, 24, 10, 14);
+            bool movingRight = Island[endIndex].Left > Island[startIndex].Left;
 
-            return boatImage;
-        }
-
-        private PictureBox CreateLifeboatBesideIsland(int islandIndex, bool placeOnRight, bool movingRight)
-        {
-            PictureBox lifeboat = new()
+            if (movingRight)
             {
-                Parent = pbMain,
-                BackColor = Color.Transparent,
-                Image = DrawLifeboat(movingRight),
-                Location = LifeboatBesideIsland(islandIndex, lifeboatSize, placeOnRight),
-                Size = lifeboatSize,
-                SizeMode = PictureBoxSizeMode.StretchImage
-            };
-            lifeboat.BringToFront();
-
-            return lifeboat;
-        }
-
-        private async Task AnimateLifeboatToIsland(PictureBox lifeboat, int startIndex, int endIndex, bool movingRight)
-        {
-            Point startLocation = LifeboatBesideIsland(startIndex, lifeboat.Size, movingRight);
-            Point endLocation = LifeboatBesideIsland(endIndex, lifeboat.Size, !movingRight);
-            const int animationSteps = 24;
-
-            for (int step = 1; step <= animationSteps; step++)
-            {
-                int left = startLocation.X + ((endLocation.X - startLocation.X) * step / animationSteps);
-                int top = startLocation.Y + ((endLocation.Y - startLocation.Y) * step / animationSteps);
-                lifeboat.Location = new Point(left, top);
-                await Task.Delay(35);
+                bmp.RotateFlip(RotateFlipType.RotateNoneFlipX);
             }
 
-            lifeboat.Dispose();
+            boat.Image = bmp;
+            Point start = new Point(
+                Island[startIndex].Left - 20,
+                Island[startIndex].Top + 10);
+
+            Point finish = new Point(
+                Island[endIndex].Left - 20,
+                Island[endIndex].Top + 10);
+
+            boat.Location = start;
+            boat.BringToFront();
+
+            int steps = 40;
+
+            for (int s = 1; s <= steps; s++)
+            {
+                int x = start.X + (finish.X - start.X) * s / steps;
+                double bob = Math.Sin(s * 0.4) * 6;
+
+                int y = start.Y
+                      + (finish.Y - start.Y) * s / steps
+                      + (int)bob;
+                boat.Location = new Point(x, y);
+
+                await Task.Delay(30);
+            }
+
+            boat.Dispose();
         }
 
         private void StartAgain()
@@ -338,12 +333,10 @@ namespace Strike_Rich
                     int sunkIsland = i;
                     int nextIsland = FindNextVisibleIslandIndex(sunkIsland);
                     bool movingRight = Island[nextIsland].Left >= Island[sunkIsland].Left;
-                    PictureBox lifeboat = CreateLifeboatBesideIsland(sunkIsland, movingRight, movingRight);
-                    txtInstructions.Text = "The farmer got into a lifeboat beside the flooded island. The island is sinking while the boat travels away.";
+                    txtInstructions.Text = "The farmer escaped in his boat.";
                     await Task.Delay(500);
-
                     Island[sunkIsland].Visible = false;
-                    await AnimateLifeboatToIsland(lifeboat, sunkIsland, nextIsland, movingRight);
+                    await AnimateBoat(sunkIsland, nextIsland);
                     i = nextIsland;
                     IslandImage("IslandFarmer.png");
                     diceRoll = 0;
