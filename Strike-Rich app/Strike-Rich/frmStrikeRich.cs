@@ -17,6 +17,7 @@ namespace Strike_Rich
         int water3 = 0;
         int chance = 3;
         int diceRoll = 0;
+        readonly Size lifeboatSize = new(80, 60);
         readonly Random dice = new();
         readonly string[] diceFaces = { "⚀", "⚁", "⚂", "⚃", "⚄", "⚅" };
 
@@ -176,24 +177,26 @@ namespace Strike_Rich
                 Island[islandIndex].Top + ((Island[islandIndex].Height - lifeboatSize.Height) / 2));
         }
 
-        private async Task AnimateLifeboatToIsland(int startIndex, int endIndex)
+        private PictureBox CreateLifeboatOnIsland(int islandIndex)
         {
-            Size lifeboatSize = new(
-                Math.Max(70, Island[endIndex].Width / 2),
-                Math.Max(50, Island[endIndex].Height / 2));
-            Point startLocation = CenterLifeboatOnIsland(startIndex, lifeboatSize);
-            Point endLocation = CenterLifeboatOnIsland(endIndex, lifeboatSize);
-
             PictureBox lifeboat = new()
             {
                 Parent = pbMain,
                 BackColor = Color.Transparent,
                 ImageLocation = path + "LifeBoat.png",
-                Location = startLocation,
+                Location = CenterLifeboatOnIsland(islandIndex, lifeboatSize),
                 Size = lifeboatSize,
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
             lifeboat.BringToFront();
+
+            return lifeboat;
+        }
+
+        private async Task AnimateLifeboatToIsland(PictureBox lifeboat, int startIndex, int endIndex)
+        {
+            Point startLocation = CenterLifeboatOnIsland(startIndex, lifeboat.Size);
+            Point endLocation = CenterLifeboatOnIsland(endIndex, lifeboat.Size);
             const int animationSteps = 24;
 
             for (int step = 1; step <= animationSteps; step++)
@@ -310,14 +313,14 @@ namespace Strike_Rich
 
                 if (chance > 0)
                 {
-                    Image(Island[i], "LifeBoat.png");
+                    PictureBox lifeboat = CreateLifeboatOnIsland(i);
                     txtInstructions.Text = "The farmer got into a lifeboat. Now the flooded island is sinking away.";
                     await Task.Delay(900);
 
                     int sunkIsland = i;
                     int nextIsland = FindNextVisibleIslandIndex(sunkIsland);
                     Island[sunkIsland].Visible = false;
-                    await AnimateLifeboatToIsland(sunkIsland, nextIsland);
+                    await AnimateLifeboatToIsland(lifeboat, sunkIsland, nextIsland);
                     i = nextIsland;
                     IslandImage("IslandFarmer.png");
                     diceRoll = 0;
