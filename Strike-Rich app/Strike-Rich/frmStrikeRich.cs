@@ -151,20 +151,50 @@ namespace Strike_Rich
 
         private void AdvanceToNextVisibleIsland()
         {
-            for (int islandCount = 0; islandCount < Island.Count; islandCount++)
-            {
-                i = (i + 1) % Island.Count;
-                if (Island[i].Visible)
-                {
-                    return;
-                }
-            }
+            i = FindNextVisibleIslandIndex(i);
         }
 
-        private void MoveFarmerToNextVisibleIsland()
+        private int FindNextVisibleIslandIndex(int startIndex)
         {
-            AdvanceToNextVisibleIsland();
-            IslandImage("IslandFarmer.png");
+            int nextIndex = startIndex;
+            for (int islandCount = 0; islandCount < Island.Count; islandCount++)
+            {
+                nextIndex = (nextIndex + 1) % Island.Count;
+                if (Island[nextIndex].Visible)
+                {
+                    return nextIndex;
+                }
+            }
+
+            return startIndex;
+        }
+
+        private async Task AnimateLifeboatToIsland(int startIndex, int endIndex)
+        {
+            PictureBox lifeboat = new()
+            {
+                Parent = pbMain,
+                BackColor = Color.Transparent,
+                ImageLocation = path + "LifeBoat.png",
+                Location = Island[startIndex].Location,
+                Size = Island[startIndex].Size,
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            lifeboat.BringToFront();
+
+            Point startLocation = Island[startIndex].Location;
+            Point endLocation = Island[endIndex].Location;
+            const int animationSteps = 24;
+
+            for (int step = 1; step <= animationSteps; step++)
+            {
+                int left = startLocation.X + ((endLocation.X - startLocation.X) * step / animationSteps);
+                int top = startLocation.Y + ((endLocation.Y - startLocation.Y) * step / animationSteps);
+                lifeboat.Location = new Point(left, top);
+                await Task.Delay(35);
+            }
+
+            lifeboat.Dispose();
         }
 
         private void StartAgain()
@@ -274,8 +304,12 @@ namespace Strike_Rich
                     txtInstructions.Text = "The farmer got into a lifeboat. Now the flooded island is sinking away.";
                     await Task.Delay(900);
 
-                    Island[i].Visible = false;
-                    MoveFarmerToNextVisibleIsland();
+                    int sunkIsland = i;
+                    int nextIsland = FindNextVisibleIslandIndex(sunkIsland);
+                    Island[sunkIsland].Visible = false;
+                    await AnimateLifeboatToIsland(sunkIsland, nextIsland);
+                    i = nextIsland;
+                    IslandImage("IslandFarmer.png");
                     diceRoll = 0;
                     ResetDiceButton();
                     btnStartGo.Enabled = true;
