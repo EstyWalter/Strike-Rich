@@ -88,7 +88,7 @@ namespace Strike_Rich
 
         private void ResetDiceButton()
         {
-            btnRollDice.Text = "🎲\nROLL";
+            btnRollDice.Text = "🎲";
         }
 
         private void IslandImage(string picture)
@@ -224,12 +224,12 @@ namespace Strike_Rich
             for (int roll = 0; roll < 12; roll++)
             {
                 int rollingNumber = dice.Next(1, 7);
-                btnRollDice.Text = $"{diceFaces[rollingNumber - 1]}\nRolling";
+                btnRollDice.Text = diceFaces[rollingNumber - 1];
                 await Task.Delay(100);
             }
 
             diceRoll = dice.Next(1, 7);
-            btnRollDice.Text = $"{diceFaces[diceRoll - 1]}\n{diceRoll}";
+            btnRollDice.Text = diceFaces[diceRoll - 1];
             btnStartGo.Enabled = true;
             txtInstructions.Text = $"The dice landed on {diceRoll}. Press GO to move the farmer {diceRoll} space{(diceRoll == 1 ? "" : "s")}.";
         }
