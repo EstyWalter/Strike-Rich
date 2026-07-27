@@ -16,29 +16,18 @@ namespace Strike_Rich
         int water2 = 0;
         int water3 = 0;
         int chance = 3;
-        float relativeX = 0.47f;
-        float relativeY = 0.41f;
 
         public frmStrikeRich()
         {
             InitializeComponent();
-       
             HideDiamondAndWater();
             Island = new() { pbIsland1, pbIsland2, pbIsland3, pbIsland4, pbIsland5, pbIsland6, pbIsland7, pbIsland8, pbIsland9, pbIsland10, pbIsland11, pbIsland12 };
             Image("StartScreen.png");
-            btnDoor.Parent = pbMain;
-            btnStartGo.Parent = pbMain;
-           //tblMain.Parent = pbMain;
-            txtInstructions.Parent = pbMain;
             pbIslandStart.Enabled = false;
-            //.Visible = false;
-            btnStartGo.Visible = false;
-            // pbIslandStart.Visible = false;
-            //pbMain.BringToFront();
+            VisibleControl(false);
             Island.ForEach(i => i.Click += I_Click);
             btnStartGo.Click += BtnStartGo_Click;
             btnDoor.Click += BtnDoor_Click;
-            pbMain.Resize += PbMain_Resize;
         }
 
         private void Image(PictureBox pb, string image)
@@ -49,36 +38,34 @@ namespace Strike_Rich
         private void Image(string picture)
         {
             Image(pbMain, picture);
-            pbMain.Dock = DockStyle.Fill;
             if (picture == "win.png" || picture == "Sinking.png")
             {
-                Island.ForEach(i => i.Visible = false);
-                pbIslandStart.Visible = false;
-                tblMain.Visible = false;
+                Island.ForEach(i => VisibleControl(i));
+                VisibleControl(pbIslandStart);
             }
         }
 
-
-
-        private void Parent(Control thecontrol)
+        private void VisibleControl(Control thecontrol, Boolean status = false)
         {
-            thecontrol.Parent = tblMain;
+            thecontrol.Visible = status;
         }
+
+        private void VisibleControl(Boolean status = false)
+        {
+            VisibleControl(btnStartGo, status);
+            VisibleControl(pbIslandStart, status);
+            Island.ForEach(i => VisibleControl(i, status));
+        }
+
         private void Settings(Control thecontrol)
         {
+            thecontrol.Parent = pbMain;
             thecontrol.BackColor = Color.Transparent;
             thecontrol.Enabled = false;
         }
 
         private void StartGame()
         {
-            tblMain = new TableLayoutPanel();
-            pbMain.Controls.Add(tblMain);
-            tblMain.Visible = true;
-           // tblMain.Parent = pbMain;
-            //pbMain.SendToBack();
-            tblMain.BackColor = Color.FromArgb(120, Color.White);
-         //   tblMain.Dock = DockStyle.Fill;
             txtInstructions.BackColor = Color.AliceBlue;
             txtInstructions.ForeColor = Color.Black;
             txtInstructions.Text = "A poor farmer is digging to find a treasure and save his family home. Click the island to dig for hidden diamond. (Watch out for floods - some islands are traps!) Click go to skip to the next island.";
@@ -87,17 +74,8 @@ namespace Strike_Rich
             Island.ForEach(i => Image(i, "Island.png"));
             Island.ForEach(i => Settings(i));
             Settings(pbIslandStart);
-            btnDoor.Visible = false;
-            btnStartGo.Visible = true;
-            pbIslandStart.Visible = true;
-            Island.ForEach(i => i.Visible = true);
-            pbIslandStart.Visible = true;
-            tblMain.BringToFront();
-            pbIslandStart.BringToFront();
-            txtInstructions.BringToFront();
-            btnStartGo.BringToFront();
-
-
+            VisibleControl(btnDoor);
+            VisibleControl(true);
         }
 
         private void IslandImage(string picture)
@@ -105,32 +83,21 @@ namespace Strike_Rich
             Island[i].Enabled = true;
             Image(Island[i], picture);
         }
-        //private void Random(int number)
-        //{
-        //    Random rnd = new();
-        //    number =
-        //}
-
+        private int random(int number)
+        {
+            Random rnd = new();
+            number  = rnd.Next(0, 12);
+            return number;
+        }
         private void HideDiamondAndWater()
         {
+          water =  random(water);
+          water1 =  random(water1);
+          water2 =  random(water2);
+          water3 = random(water3);
+          diamond = random(diamond);
+        }
 
-            Random rnd = new();
-            water = rnd.Next(0, 12);
-            water1 = rnd.Next(0, 12);
-            water2 = rnd.Next(0, 12);
-            water3 = rnd.Next(0, 12);
-            diamond = rnd.Next(0, 12);
-            // if (diamond == water)
-            // {
-            //     Random(diamond);
-            // }
-        }
-        private void PbMain_Resize(object? sender, EventArgs e)
-        {
-            int newX = (int)(pbMain.Width * relativeX) - (btnDoor.Width / 2);
-            int newY = (int)(pbMain.Height * relativeY) - (btnDoor.Height / 2);
-            btnDoor.Location = new Point(newX, newY);
-        }
         private void startgo()
         {
             txtInstructions.Text = "Click on the island to dig it up or click on the go button to skip to the next island.";
@@ -240,96 +207,6 @@ namespace Strike_Rich
         private void I_Click(object? sender, EventArgs e)
         {
             IslandChange();
-        }
-
-        private void pbIsland1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIsland10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIsland7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pbIsland11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtInstructions_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void frmStrikeRich_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tblMain_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pbIsland12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIsland4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIsland6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIsland9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIsland7_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIsland3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIsland8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIsland11_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbMain_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbIslandStart_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
