@@ -10,53 +10,52 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\..\..\..\Downloads\Game Starting Screen.png" Link="Images\Game Starting Screen.png">
+    <Content Include="Images\Game Starting Screen.png" Link="Images\Game Starting Screen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\Gameover.png" Link="Images\Gameover.png" />
-    <Content Include="..\..\..\..\..\Downloads\House1Boat.png" Link="Images\House1Boat.png">
+    <Content Include="Images\House1Boat.png" Link="Images\House1Boat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\House2Boats.png" Link="Images\House2Boats.png">
+    <Content Include="Images\House2Boats.png" Link="Images\House2Boats.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\Island.png" Link="Images\Island.png">
+    <Content Include="Images\Island.png" Link="Images\Island.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\IslandDiamond.png" Link="Images\IslandDiamond.png">
+    <Content Include="Images\IslandDiamond.png" Link="Images\IslandDiamond.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\IslandFarmer.png" Link="Images\IslandFarmer.png">
+    <Content Include="Images\IslandFarmer.png" Link="Images\IslandFarmer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\IslandHole.png" Link="Images\IslandHole.png">
+    <Content Include="Images\IslandHole.png" Link="Images\IslandHole.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\IslandHouse.png" Link="Images\IslandHouse.png">
+    <Content Include="Images\IslandHouse.png" Link="Images\IslandHouse.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\IslandHouseNoBoat.png" Link="Images\IslandHouseNoBoat.png">
+    <Content Include="Images\IslandHouseNoBoat.png" Link="Images\IslandHouseNoBoat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\IslandHouseNoFarmer.png" Link="Images\IslandHouseNoFarmer.png">
+    <Content Include="Images\IslandHouseNoFarmer.png" Link="Images\IslandHouseNoFarmer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\IslandWater.png" Link="Images\IslandWater.png">
+    <Content Include="Images\IslandWater.png" Link="Images\IslandWater.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\LifeBoat.png" Link="Images\LifeBoat.png">
+    <Content Include="Images\LifeBoat.png" Link="Images\LifeBoat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\Ocean.png" Link="Images\Ocean.png">
+    <Content Include="Images\Ocean.png" Link="Images\Ocean.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\Sinking.png" Link="Images\Sinking.png">
+    <Content Include="Images\Sinking.png" Link="Images\Sinking.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\StartScreen.png" Link="Images\StartScreen.png">
+    <Content Include="Images\StartScreen.png" Link="Images\StartScreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\..\Downloads\win.png" Link="Images\win.png">
+    <Content Include="Images\win.png" Link="Images\win.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
