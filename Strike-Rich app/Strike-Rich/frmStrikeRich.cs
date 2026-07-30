@@ -83,6 +83,7 @@ namespace Strike_Rich
             Island[i].Enabled = true;
             Image(Island[i], picture);
         }
+
         private int random(int number)
         {
             Random rnd = new();
