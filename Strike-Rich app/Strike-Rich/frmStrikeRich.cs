@@ -90,6 +90,7 @@ namespace Strike_Rich
             number  = rnd.Next(0, 12);
             return number;
         }
+
         private void HideDiamondAndWater()
         {
           water =  random(water);
@@ -153,6 +154,7 @@ namespace Strike_Rich
             }
             pbIslandStart.Enabled = false;
         }
+
         private void Go()
         {
             if (btnStartGo.Text == "START" || btnStartGo.Text == "GO")
@@ -171,15 +173,6 @@ namespace Strike_Rich
                 Island[i].Enabled = false;
             }
 
-        }
-        private void BtnDoor_Click(object? sender, EventArgs e)
-        {
-            StartGame();
-        }
-
-        private void BtnStartGo_Click(object? sender, EventArgs e)
-        {
-            Go();
         }
 
         private void IslandChange()
@@ -205,6 +198,17 @@ namespace Strike_Rich
                 txtInstructions.Text = "The farmer wasted his energy and time. The hole is empty";
             }
         }
+
+        private void BtnDoor_Click(object? sender, EventArgs e)
+        {
+            StartGame();
+        }
+
+        private void BtnStartGo_Click(object? sender, EventArgs e)
+        {
+            Go();
+        }
+
         private void I_Click(object? sender, EventArgs e)
         {
             IslandChange();
